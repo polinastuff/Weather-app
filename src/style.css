@@ -2,7 +2,8 @@ body {
   padding: 50px 70px;
 }
 h4,
-li {
+li,
+footer {
   font-family: "Poppins", sans-serif;
 }
 h4 {
@@ -20,6 +21,11 @@ li {
   list-style: none;
   top: 25px;
   right: 60px;
+}
+footer {
+  font-size: 14px;
+  font-weight: 300;
+  margin: 5px;
 }
 .date-time,
 .wind-humidity {
