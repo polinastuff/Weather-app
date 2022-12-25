@@ -1,0 +1,85 @@
+body {
+  padding: 50px 70px;
+}
+h4,
+li {
+  font-family: "Poppins", sans-serif;
+}
+h4 {
+  font-weight: 300;
+  padding: 20px 40px;
+  margin: 0;
+}
+ul {
+  padding: 0px 70px 0 0;
+  margin: 50px 50px;
+}
+li {
+  font-size: 20px;
+  position: fixed;
+  list-style: none;
+  top: 25px;
+  right: 60px;
+}
+.date-time,
+.wind-humidity {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+
+.card-content {
+  background-image: url("/Users/polinadomnina/Desktop/SheCodes Plus/Homework 2 copy/images/landscape-2.jpg");
+}
+
+.city,
+.temperature,
+.currently {
+  font-family: "Aboreto", cursive;
+}
+
+.search-bar,
+.search-button,
+.current-location-button {
+  display: inline;
+}
+
+.city,
+.temperature {
+  font-size: 50px;
+  font-weight: bold;
+  padding: 20px;
+}
+.temp {
+  font-weight: 600;
+}
+.currently {
+  font-size: 45px;
+  font-weight: 400;
+  padding: 50px 100px 30px 40px;
+  margin: 20px 0 0;
+}
+.date-time {
+  padding: 20px 100px 10px 40px;
+  font-size: 25px;
+}
+.wind-humidity {
+  line-height: 30px;
+  padding: 20px 50px;
+  margin: 120px 0 50px;
+}
+
+#celcius,
+#fahrenheit {
+  text-decoration: none;
+}
+
+.celcius-fahrenheit {
+  font-size: 25px;
+  color: #007bff;
+  vertical-align: baseline;
+}
+
+#celcius:hover,
+#fahrenheit:hover {
+  text-decoration: underline;
+}
