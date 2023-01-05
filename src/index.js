@@ -32,7 +32,7 @@ getDate();
 function changeData(response) {
   document.querySelector("#city").innerHTML = response.data.name;
   document.querySelector("#temperature").innerHTML =
-    Math.round(response.data.main.temp) + "° C";
+    Math.round(response.data.main.temp) + " °C";
   document.querySelector("#feels-like-temperature").innerHTML =
     Math.round(response.data.main.feels_like) + "°";
   document.querySelector("#main-description").innerHTML =
