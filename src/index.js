@@ -1,5 +1,4 @@
-//to get the date
-function getDate() {
+function updateDate(timestamp) {
   let days = [
     "Sunday",
     "Monday",
@@ -9,8 +8,7 @@ function getDate() {
     "Friday",
     "Saturday",
   ];
-
-  let date = new Date();
+  let date = new Date(timestamp);
   let day = date.getDay();
   let hours = date.getHours();
   if (hours < 10) {
@@ -21,11 +19,8 @@ function getDate() {
     minutes = `0${minutes}`;
   }
   let fullDate = `${days[day]}, ${hours}:${minutes}`;
-
-  document.querySelector("#full-date").innerHTML = fullDate;
+  return fullDate;
 }
-
-getDate();
 
 //to change the city and data
 
@@ -41,6 +36,9 @@ function changeData(response) {
     response.data.wind.speed
   );
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+  document.querySelector("#full-date").innerHTML = updateDate(
+    response.data.dt * 1000
+  );
 }
 
 function updateCity(event) {
@@ -54,7 +52,6 @@ function getCityData(city) {
   let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
   axios.get(apiURL).then(changeData);
-  getDate();
 }
 
 let searchForm = document.querySelector("#city-form");
@@ -81,7 +78,6 @@ function getLocation(response) {
 function getCurrentLocationData(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(getLocation);
-  getDate();
 }
 
 let getCurrentLocationButton = document.querySelector(
