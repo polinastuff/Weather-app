@@ -1,4 +1,10 @@
-function updateDate(timestamp) {
+//get time of the searched city
+function getDate(timezone) {
+  let date = new Date();
+  let utcDate = date.getTime() + date.getTimezoneOffset() * 60000;
+  let cityDate = utcDate + timezone * 1000;
+  let newCityDate = new Date(cityDate);
+
   let days = [
     "Sunday",
     "Monday",
@@ -8,13 +14,13 @@ function updateDate(timestamp) {
     "Friday",
     "Saturday",
   ];
-  let date = new Date(timestamp);
-  let day = date.getDay();
-  let hours = date.getHours();
+
+  let day = newCityDate.getDay();
+  let hours = newCityDate.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
   }
-  let minutes = date.getMinutes();
+  let minutes = newCityDate.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
@@ -36,8 +42,8 @@ function changeData(response) {
     response.data.wind.speed
   );
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-  document.querySelector("#full-date").innerHTML = updateDate(
-    response.data.dt * 1000
+  document.querySelector("#full-date").innerHTML = getDate(
+    response.data.timezone
   );
 }
 
