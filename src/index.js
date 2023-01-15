@@ -33,16 +33,17 @@ function getDate(timezone) {
 function changeData(response) {
   celsiusTemperature = Math.round(response.data.main.temp);
   celsiusFeelsLikeTemperature = Math.round(response.data.main.feels_like);
+  windSpeedMetric = Math.round(response.data.wind.speed);
+  let windSpeedUnit = document.querySelector("#wind-speed-unit");
 
+  windSpeedUnit.innerHTML = " meter/sec";
   document.querySelector("#city").innerHTML = response.data.name;
   document.querySelector("#temperature").innerHTML = celsiusTemperature;
   document.querySelector("#feels-like-temperature").innerHTML =
     celsiusFeelsLikeTemperature;
   document.querySelector("#main-description").innerHTML =
     response.data.weather[0].main;
-  document.querySelector("#wind-speed").innerHTML = Math.round(
-    response.data.wind.speed
-  );
+  document.querySelector("#wind-speed").innerHTML = windSpeedMetric;
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#full-date").innerHTML = getDate(
     response.data.timezone
@@ -53,6 +54,7 @@ function changeData(response) {
       "src",
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
+
   celsius.classList.add("active");
   fahrenheit.classList.remove("active");
 }
@@ -103,9 +105,14 @@ function convertToFahrenheit(event) {
   let fahrenheitFeelsLikeTemperature = Math.round(
     (celsiusFeelsLikeTemperature * 9) / 5 + 32
   );
+  let windSpeedElement = document.querySelector("#wind-speed");
+  let windSpeedImperial = Math.round(windSpeedMetric * 2.237);
+  let windSpeedUnit = document.querySelector("#wind-speed-unit");
 
   temperatureElement.innerHTML = fahrenheitTemperature;
   feelsLikeTemperatureElement.innerHTML = fahrenheitFeelsLikeTemperature;
+  windSpeedElement.innerHTML = windSpeedImperial;
+  windSpeedUnit.innerHTML = " miles/hour";
   celsius.classList.remove("active");
   fahrenheit.classList.add("active");
 }
@@ -116,14 +123,19 @@ function convertToCelsius(event) {
   let feelsLikeTemperatureElement = document.querySelector(
     "#feels-like-temperature"
   );
+  let windSpeedElement = document.querySelector("#wind-speed");
+  let windSpeedUnit = document.querySelector("#wind-speed-unit");
   temperatureElement.innerHTML = celsiusTemperature;
   feelsLikeTemperatureElement.innerHTML = celsiusFeelsLikeTemperature;
+  windSpeedElement.innerHTML = windSpeedMetric;
+  windSpeedUnit.innerHTML = " meter/sec";
   celsius.classList.add("active");
   fahrenheit.classList.remove("active");
 }
 
 let celsiusTemperature = null;
 let celsiusFeelsLikeTemperature = null;
+let windSpeedMetric = null;
 
 let fahrenheit = document.querySelector("#fahrenheit");
 fahrenheit.addEventListener("click", convertToFahrenheit);
