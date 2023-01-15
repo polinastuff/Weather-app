@@ -74,22 +74,26 @@ footer {
   margin: 120px 0 50px;
 }
 
-#celcius,
-#fahrenheit {
-  text-decoration: none;
-}
-
-.celcius-fahrenheit {
-  font-size: 25px;
-  color: #007bff;
-  vertical-align: baseline;
-}
-
-#celcius:hover,
-#fahrenheit:hover {
-  text-decoration: underline;
-}
 #weather-icon {
   display: block;
   margin: 0 auto;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: purple;
+}
+
+.temperature .active {
+  color: black;
+  cursor: default;
+}
+
+#units {
+  font-size: 25px;
+  vertical-align: baseline;
 }

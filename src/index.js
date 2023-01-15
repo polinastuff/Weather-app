@@ -31,11 +31,13 @@ function getDate(timezone) {
 //to change the city and data
 
 function changeData(response) {
+  celsiusTemperature = Math.round(response.data.main.temp);
+  celsiusFeelsLikeTemperature = Math.round(response.data.main.feels_like);
+
   document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#temperature").innerHTML =
-    Math.round(response.data.main.temp) + " °C";
+  document.querySelector("#temperature").innerHTML = celsiusTemperature;
   document.querySelector("#feels-like-temperature").innerHTML =
-    Math.round(response.data.main.feels_like) + "°";
+    celsiusFeelsLikeTemperature;
   document.querySelector("#main-description").innerHTML =
     response.data.weather[0].main;
   document.querySelector("#wind-speed").innerHTML = Math.round(
@@ -51,12 +53,8 @@ function changeData(response) {
       "src",
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
-}
-
-function updateCity(event) {
-  event.preventDefault();
-  let city = document.querySelector("#search-bar").value;
-  getCityData(city);
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
 }
 
 function getCityData(city) {
@@ -66,10 +64,11 @@ function getCityData(city) {
   axios.get(apiURL).then(changeData);
 }
 
-let searchForm = document.querySelector("#city-form");
-searchForm.addEventListener("submit", updateCity);
-
-getCityData("Berlin");
+function updateCity(event) {
+  event.preventDefault();
+  let city = document.querySelector("#search-bar").value;
+  getCityData(city);
+}
 
 //get current location data
 
@@ -92,7 +91,52 @@ function getCurrentLocationData(event) {
   navigator.geolocation.getCurrentPosition(getLocation);
 }
 
+//convert to Fahrenheit or Celcius
+
+function convertToFahrenheit(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  let feelsLikeTemperatureElement = document.querySelector(
+    "#feels-like-temperature"
+  );
+  let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
+  let fahrenheitFeelsLikeTemperature = Math.round(
+    (celsiusFeelsLikeTemperature * 9) / 5 + 32
+  );
+
+  temperatureElement.innerHTML = fahrenheitTemperature;
+  feelsLikeTemperatureElement.innerHTML = fahrenheitFeelsLikeTemperature;
+  celsius.classList.remove("active");
+  fahrenheit.classList.add("active");
+}
+
+function convertToCelsius(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  let feelsLikeTemperatureElement = document.querySelector(
+    "#feels-like-temperature"
+  );
+  temperatureElement.innerHTML = celsiusTemperature;
+  feelsLikeTemperatureElement.innerHTML = celsiusFeelsLikeTemperature;
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
+}
+
+let celsiusTemperature = null;
+let celsiusFeelsLikeTemperature = null;
+
+let fahrenheit = document.querySelector("#fahrenheit");
+fahrenheit.addEventListener("click", convertToFahrenheit);
+
+let celsius = document.querySelector("#celsius");
+celsius.addEventListener("click", convertToCelsius);
+
+let searchForm = document.querySelector("#city-form");
+searchForm.addEventListener("submit", updateCity);
+
 let getCurrentLocationButton = document.querySelector(
   "#current-location-button"
 );
 getCurrentLocationButton.addEventListener("click", getCurrentLocationData);
+
+getCityData("Berlin");
