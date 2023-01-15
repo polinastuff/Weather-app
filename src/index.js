@@ -70,6 +70,7 @@ function updateCity(event) {
   event.preventDefault();
   let city = document.querySelector("#search-bar").value;
   getCityData(city);
+  document.getElementById("city-form").reset();
 }
 
 //get current location data
