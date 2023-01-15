@@ -61,11 +61,11 @@ footer {
 .currently {
   font-size: 45px;
   font-weight: 400;
-  padding: 50px 100px 30px 40px;
+  padding: 50px 100px 20px 40px;
   margin: 20px 0 0;
 }
 .date-time {
-  padding: 20px 100px 10px 40px;
+  padding: 0px 100px 10px 40px;
   font-size: 25px;
 }
 .wind-humidity {
@@ -88,4 +88,8 @@ footer {
 #celcius:hover,
 #fahrenheit:hover {
   text-decoration: underline;
+}
+#weather-icon {
+  display: block;
+  margin: 0 auto;
 }

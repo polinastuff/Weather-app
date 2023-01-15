@@ -45,6 +45,12 @@ function changeData(response) {
   document.querySelector("#full-date").innerHTML = getDate(
     response.data.timezone
   );
+  document
+    .querySelector("#weather-icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
 }
 
 function updateCity(event) {
