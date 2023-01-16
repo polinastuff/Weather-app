@@ -98,17 +98,12 @@ function getCurrentLocationData(event) {
 
 function convertToFahrenheit(event) {
   event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  let feelsLikeTemperatureElement = document.querySelector(
-    "#feels-like-temperature"
-  );
+
   let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
   let fahrenheitFeelsLikeTemperature = Math.round(
     (celsiusFeelsLikeTemperature * 9) / 5 + 32
   );
-  let windSpeedElement = document.querySelector("#wind-speed");
   let windSpeedImperial = Math.round(windSpeedMetric * 2.237);
-  let windSpeedUnit = document.querySelector("#wind-speed-unit");
 
   temperatureElement.innerHTML = fahrenheitTemperature;
   feelsLikeTemperatureElement.innerHTML = fahrenheitFeelsLikeTemperature;
@@ -120,12 +115,6 @@ function convertToFahrenheit(event) {
 
 function convertToCelsius(event) {
   event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  let feelsLikeTemperatureElement = document.querySelector(
-    "#feels-like-temperature"
-  );
-  let windSpeedElement = document.querySelector("#wind-speed");
-  let windSpeedUnit = document.querySelector("#wind-speed-unit");
   temperatureElement.innerHTML = celsiusTemperature;
   feelsLikeTemperatureElement.innerHTML = celsiusFeelsLikeTemperature;
   windSpeedElement.innerHTML = windSpeedMetric;
@@ -133,6 +122,35 @@ function convertToCelsius(event) {
   celsius.classList.add("active");
   fahrenheit.classList.remove("active");
 }
+
+//display forecast function
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
+
+  let forecastHTML = `<div>`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      ` <ul>
+          🌧 ${day}
+          <br />
+          <span class="temp">34°</span>
+        </ul>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+displayForecast();
+
+let temperatureElement = document.querySelector("#temperature");
+let feelsLikeTemperatureElement = document.querySelector(
+  "#feels-like-temperature"
+);
+let windSpeedElement = document.querySelector("#wind-speed");
+let windSpeedUnit = document.querySelector("#wind-speed-unit");
 
 let celsiusTemperature = null;
 let celsiusFeelsLikeTemperature = null;
