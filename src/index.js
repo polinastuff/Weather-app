@@ -54,6 +54,7 @@ function changeData(response) {
       "src",
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
+  getForecast(response.data.coord);
 
   celsius.classList.add("active");
   fahrenheit.classList.remove("active");
@@ -123,9 +124,11 @@ function convertToCelsius(event) {
   fahrenheit.classList.remove("active");
 }
 
-//display forecast function
+//display forecast on the right
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data);
+
   let forecastElement = document.querySelector("#forecast");
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
 
@@ -136,19 +139,25 @@ function displayForecast() {
       ` <ul>
           🌧 ${day}
           <br />
-          <span class="temp">34°</span>
+          <span class="temp" id="temp">34°</span>
         </ul>`;
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
-displayForecast();
+//get data for the forecast
+function getForecast(coordinates) {
+  let apiKey = "c8a77112b2faf6684bb4b21a0aa778ae";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=hourly,minutely&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
 
 let temperatureElement = document.querySelector("#temperature");
 let feelsLikeTemperatureElement = document.querySelector(
   "#feels-like-temperature"
 );
+
 let windSpeedElement = document.querySelector("#wind-speed");
 let windSpeedUnit = document.querySelector("#wind-speed-unit");
 
