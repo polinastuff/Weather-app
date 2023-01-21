@@ -14,6 +14,7 @@ h4 {
 ul {
   padding: 0px 70px 0 0;
   margin: 50px 50px;
+  text-align: justify-all;
 }
 li {
   font-size: 20px;
@@ -77,6 +78,10 @@ footer {
 #weather-icon {
   display: block;
   margin: 0 auto;
+}
+
+#night-temp {
+  color: rgba(39, 33, 66, 0.4);
 }
 
 a {

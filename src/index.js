@@ -124,25 +124,78 @@ function convertToCelsius(event) {
   fahrenheit.classList.remove("active");
 }
 
+//format forecast date
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+//update Emoji
+function updateEmoji(main) {
+  let emoji = "😳";
+
+  if (main === "Thunderstorm") {
+    emoji = "⚡️";
+  } else {
+    if (main === "Drizzle") {
+      emoji = "☔️";
+    } else {
+      if (main === "Rain") {
+        emoji = "🌧";
+      } else {
+        if (main === "Snow") {
+          emoji = "❄️";
+        } else {
+          if (main === "Clouds") {
+            emoji = "☁️";
+          } else {
+            if (
+              main === "Mist" ||
+              main === "Smoke" ||
+              main === "Haze" ||
+              main === "Dust" ||
+              main === "Fog" ||
+              main === "Sand" ||
+              main === "Ash" ||
+              main === "Squall" ||
+              main === "Tornado"
+            ) {
+              emoji = "🌫";
+            } else {
+              emoji = "☀️";
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return emoji;
+}
+
 //display forecast on the right
 
 function displayForecast(response) {
-  console.log(response.data);
-
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
+  let forecastHTML = "";
 
-  let forecastHTML = `<div>`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      ` <ul>
-          🌧 ${day}
-          <br />
-          <span class="temp" id="temp">34°</span>
+  forecast.forEach(function (dailyForecast, index) {
+    if (index > 0 && index < 6) {
+      forecastHTML += ` <ul>
+    <span id = "emoji">${updateEmoji(dailyForecast.weather[0].main)}</span>
+      ${formatDay(dailyForecast.dt)}
+          <div class="temp">
+          <span id="day-temp">${Math.round(dailyForecast.temp.day)}°</span>
+           <span id="night-temp">${Math.round(dailyForecast.temp.night)}°</span>
+           </div>
         </ul>`;
+    }
   });
-  forecastHTML = forecastHTML + `</div>`;
+
   forecastElement.innerHTML = forecastHTML;
 }
 
