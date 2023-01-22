@@ -1,5 +1,5 @@
 body {
-  padding: 50px 70px;
+  padding: 40px 70px;
 }
 h4,
 li,
@@ -72,7 +72,7 @@ footer {
 .wind-humidity {
   line-height: 30px;
   padding: 20px 50px;
-  margin: 120px 0 50px;
+  margin: 50px 0 50px;
 }
 
 #weather-icon {
