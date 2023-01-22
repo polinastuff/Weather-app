@@ -92,13 +92,3 @@ a {
 a:hover {
   color: purple;
 }
-
-.temperature .active {
-  color: black;
-  cursor: default;
-}
-
-#units {
-  font-size: 25px;
-  vertical-align: baseline;
-}

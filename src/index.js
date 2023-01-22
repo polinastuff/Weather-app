@@ -31,19 +31,21 @@ function getDate(timezone) {
 //to change the city and data
 
 function changeData(response) {
-  celsiusTemperature = Math.round(response.data.main.temp);
-  celsiusFeelsLikeTemperature = Math.round(response.data.main.feels_like);
-  windSpeedMetric = Math.round(response.data.wind.speed);
-  let windSpeedUnit = document.querySelector("#wind-speed-unit");
-
-  windSpeedUnit.innerHTML = " meter/sec";
   document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#temperature").innerHTML = celsiusTemperature;
-  document.querySelector("#feels-like-temperature").innerHTML =
-    celsiusFeelsLikeTemperature;
+  document.querySelector("#temperature").innerHTML = Math.round(
+    response.data.main.temp
+  );
+  document.querySelector("#main-emoji").innerHTML = updateEmoji(
+    response.data.weather[0].main
+  );
+  document.querySelector("#feels-like-temperature").innerHTML = Math.round(
+    response.data.main.feels_like
+  );
   document.querySelector("#main-description").innerHTML =
     response.data.weather[0].main;
-  document.querySelector("#wind-speed").innerHTML = windSpeedMetric;
+  document.querySelector("#wind-speed").innerHTML = Math.round(
+    response.data.wind.speed
+  );
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#full-date").innerHTML = getDate(
     response.data.timezone
@@ -55,16 +57,20 @@ function changeData(response) {
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
   getForecast(response.data.coord);
-
-  celsius.classList.add("active");
-  fahrenheit.classList.remove("active");
 }
 
 function getCityData(city) {
   let apiKey = "d9682284ab68bba42fdaf690958f42f3";
   let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-  axios.get(apiURL).then(changeData);
+  axios
+    .get(apiURL)
+    .then(changeData)
+    .catch(function (error) {
+      alert(
+        "Sorry, we could not get data for this city. Please check if spelling is correct."
+      );
+    });
 }
 
 function updateCity(event) {
@@ -93,35 +99,6 @@ function getLocation(response) {
 function getCurrentLocationData(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(getLocation);
-}
-
-//convert to Fahrenheit or Celcius
-
-function convertToFahrenheit(event) {
-  event.preventDefault();
-
-  let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
-  let fahrenheitFeelsLikeTemperature = Math.round(
-    (celsiusFeelsLikeTemperature * 9) / 5 + 32
-  );
-  let windSpeedImperial = Math.round(windSpeedMetric * 2.237);
-
-  temperatureElement.innerHTML = fahrenheitTemperature;
-  feelsLikeTemperatureElement.innerHTML = fahrenheitFeelsLikeTemperature;
-  windSpeedElement.innerHTML = windSpeedImperial;
-  windSpeedUnit.innerHTML = " miles/hour";
-  celsius.classList.remove("active");
-  fahrenheit.classList.add("active");
-}
-
-function convertToCelsius(event) {
-  event.preventDefault();
-  temperatureElement.innerHTML = celsiusTemperature;
-  feelsLikeTemperatureElement.innerHTML = celsiusFeelsLikeTemperature;
-  windSpeedElement.innerHTML = windSpeedMetric;
-  windSpeedUnit.innerHTML = " meter/sec";
-  celsius.classList.add("active");
-  fahrenheit.classList.remove("active");
 }
 
 //format forecast date
@@ -205,24 +182,6 @@ function getForecast(coordinates) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=hourly,minutely&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
-
-let temperatureElement = document.querySelector("#temperature");
-let feelsLikeTemperatureElement = document.querySelector(
-  "#feels-like-temperature"
-);
-
-let windSpeedElement = document.querySelector("#wind-speed");
-let windSpeedUnit = document.querySelector("#wind-speed-unit");
-
-let celsiusTemperature = null;
-let celsiusFeelsLikeTemperature = null;
-let windSpeedMetric = null;
-
-let fahrenheit = document.querySelector("#fahrenheit");
-fahrenheit.addEventListener("click", convertToFahrenheit);
-
-let celsius = document.querySelector("#celsius");
-celsius.addEventListener("click", convertToCelsius);
 
 let searchForm = document.querySelector("#city-form");
 searchForm.addEventListener("submit", updateCity);
