@@ -124,6 +124,9 @@ a:hover {
   .date-time {
     padding: 10px 0;
   }
+  footer {
+    text-align: center;
+  }
 }
 
 @media (min-width: 768px) {
