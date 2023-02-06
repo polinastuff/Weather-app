@@ -22,79 +22,85 @@
   </head>
   <body>
     <div class="container">
-      <div class="card w-75 card-content">
-        <div class="card-body">
-          <form id="city-form">
-            <div class="row">
-              <div class="col-9">
-                <div class="mb-3">
-                  <input
-                    type="text"
-                    class="form-control search-bar"
-                    id="search-bar"
-                    placeholder="Search for another city"
-                    autocomplete="off"
-                  />
+      <div class="row">
+        <div class="data-on-image col-md-9">
+          <div class="card card-content">
+            <div class="card-body">
+              <form id="city-form">
+                <div class="row">
+                  <div class="search-field col-md-9">
+                    <div class="mb-3">
+                      <input
+                        type="text"
+                        class="form-control search-bar"
+                        id="search-bar"
+                        placeholder="Search for another city"
+                        autocomplete="off"
+                      />
+                    </div>
+                  </div>
+                  <div class="buttons col-md-3">
+                    <input
+                      type="Submit"
+                      class="btn btn-info search-button"
+                      id="search-button"
+                      value="Search"
+                    />
+
+                    <input
+                      type="button"
+                      class="btn btn-success current-location-button"
+                      id="current-location-button"
+                      value="My location"
+                    />
+                  </div>
+                </div>
+              </form>
+              <div class="row">
+                <div class="col-md-6">
+                  <h1 class="city border border-dark rounded" id="city"></h1>
+                </div>
+                <div class="col-md-6">
+                  <h1 class="temperature">
+                    <span id="temperature"></span> °C
+                    <span id="main-emoji"></span>
+                  </h1>
                 </div>
               </div>
-              <div class="col-1">
-                <input
-                  type="Submit"
-                  class="btn btn-info search-button"
-                  id="search-button"
-                  value="Search"
-                />
+              <div class="row">
+                <div class="col">
+                  <h4 class="feels-like">
+                    Feels like <span id="feels-like-temperature"></span>°
+                  </h4>
+                </div>
               </div>
-              <div class="col-2">
-                <input
-                  type="button"
-                  class="btn btn-success current-location-button"
-                  id="current-location-button"
-                  value="My location"
-                />
+              <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6 currently text-center">
+                  <span id="main-description"></span>
+                  <img src="" alt="weather-icon" id="weather-icon" />
+                </div>
               </div>
-            </div>
-          </form>
-          <div class="row">
-            <div class="col">
-              <h1 class="city border border-dark rounded" id="city"></h1>
-            </div>
-            <div class="col">
-              <h1 class="temperature">
-                <span id="temperature"></span> °C <span id="main-emoji"></span>
-              </h1>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <h4 class="feels-like">
-                Feels like <span id="feels-like-temperature"></span>°
-              </h4>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6"></div>
-            <div class="col-6 currently text-center">
-              <span id="main-description"></span>
-              <img src="" alt="weather-icon" id="weather-icon" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6"></div>
-            <div class="col-6 date-time text-center">
-              <span id="full-date"></span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col wind-humidity">
-              Wind <span id="wind-speed"></span> meter/sec
-              <br />
-              Humidity <span id="humidity"></span>%
+              <div class="row">
+                <div class="col-6"></div>
+                <div class="col-md-6 date-time text-center">
+                  <span id="full-date"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col wind-humidity">
+                  Wind <span id="wind-speed"></span> meter/sec
+                  <br />
+                  Humidity <span id="humidity"></span>%
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <div class="forecast col-md-3">
+          <li id="forecast"></li>
+        </div>
       </div>
-      <li id="forecast"></li>
       <footer>
         <a
           href="https://github.com/polinastuff/first-github-repo"

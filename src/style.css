@@ -1,5 +1,5 @@
 body {
-  padding: 40px 70px;
+  padding: 40px 0;
 }
 h4,
 li,
@@ -12,16 +12,12 @@ h4 {
   margin: 0;
 }
 ul {
-  padding: 0px 70px 0 0;
   margin: 50px 50px;
   text-align: center;
 }
 li {
   font-size: 20px;
-  position: fixed;
   list-style: none;
-  top: 25px;
-  right: 60px;
 }
 footer {
   font-size: 14px;
@@ -62,11 +58,11 @@ footer {
 .currently {
   font-size: 45px;
   font-weight: 400;
-  padding: 50px 100px 20px 40px;
+  padding: 50px 50px 20px 0;
   margin: 20px 0 0;
 }
 .date-time {
-  padding: 0px 100px 10px 40px;
+  padding: 0px 50px 10px 0;
   font-size: 25px;
 }
 .wind-humidity {
@@ -91,4 +87,48 @@ a {
 
 a:hover {
   color: purple;
+}
+
+@media (max-width: 991px) {
+  ul {
+    margin: 30px auto;
+    padding: 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .forecast {
+    width: 20%;
+  }
+  .data-on-image {
+    width: 80%;
+  }
+  .search-field {
+    width: 60%;
+  }
+  .buttons {
+    width: 40%;
+  }
+}
+
+@media (max-width: 767px) {
+  .city {
+    margin-top: 12px;
+  }
+  .feels-like {
+    text-align: end;
+  }
+  .currently {
+    padding: 20px 0;
+  }
+  .date-time {
+    padding: 10px 0;
+  }
+}
+
+@media (min-width: 768px) {
+  #forecast {
+    position: sticky;
+    top: 20px;
+  }
 }
