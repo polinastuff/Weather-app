@@ -162,14 +162,14 @@ function displayForecast(response) {
 
   forecast.forEach(function (dailyForecast, index) {
     if (index > 0 && index < 6) {
-      forecastHTML += ` <ul>
+      forecastHTML += ` <li>
     <span id = "emoji">${updateEmoji(dailyForecast.weather[0].main)}</span>
       ${formatDay(dailyForecast.dt)}
           <div class="temp">
           <span id="day-temp">${Math.round(dailyForecast.temp.day)}°</span>
            <span id="night-temp">${Math.round(dailyForecast.temp.night)}°</span>
            </div>
-        </ul>`;
+        </li>`;
     }
   });
 

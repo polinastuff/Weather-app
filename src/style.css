@@ -11,11 +11,11 @@ h4 {
   padding: 20px 40px;
   margin: 0;
 }
-ul {
+li {
   margin: 50px 50px;
   text-align: center;
 }
-li {
+ul {
   font-size: 20px;
   list-style: none;
 }
